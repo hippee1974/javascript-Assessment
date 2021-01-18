@@ -29,6 +29,7 @@ window.addEventListener('DOMContentLoaded', () => {
   const subButton = document.querySelector('#btnSubmit');
 
   const resetButton = document.querySelector('#btnReset');
+  const scoreCount = document.querySelector('#score');
 
   // quizArray QUESTIONS & ANSWERS
   // q = QUESTION, o = OPTIONS, a = CORRECT ANSWER
@@ -83,8 +84,7 @@ window.addEventListener('DOMContentLoaded', () => {
   // Calculate the score
   const calculateScore = () => {
     let score = 0;
-    let answer ='';
-    let correctAnswer;
+   
     quizArray.map((quizItem, index) => {
       for (let i = 0; i < quizItem.length; i++) {
         //highlight the li if it is the correct answer
@@ -92,18 +92,17 @@ window.addEventListener('DOMContentLoaded', () => {
         let r = `radio_${index}_${i}`;
         liElement = document.querySelector('#' + li);
         radioElement = document.querySelector('#' + r);
-        let liValue = liElement.value;
-        let radioElementValue = radioElement.value
-        anwer = li[i];
+        
+        //anwer = li[i];
 
         if (quizItem.a == i) {
           //change background color of li element here
-          liValue.style.color = 'green';
-          score++;
+          liElement.style.color = 'green';
+          
       
         } else
         {
-          li.style.color = 'red';
+          liElement.style.color = 'red';
         }
 
         if (radioElement.checked == quizItem.a) {
@@ -116,11 +115,17 @@ window.addEventListener('DOMContentLoaded', () => {
           
         }//end for loop
 
-       correctAnswer.innerHTML = score + '/' + quizArray[i];
+       //correctAnswer.innerHTML = score + '/' + quizArray[i];
 
       
     }); //end quizArray
   };
+  
+  //scoreCard
+
+  function scoreCard(){
+    scoreCount.innerHTML = `<p>Total score- ${score} </p>`
+  }
   // call the displayQuiz function
   displayQuiz();
 
@@ -135,5 +140,6 @@ window.addEventListener('DOMContentLoaded', () => {
 
   //submit quiz
   subButton.addEventListener('click', calculateScore);
+  subButton.addEventListener('click', scoreCard);
   resetButton.addEventListener('click', clearDisplay);
 });
