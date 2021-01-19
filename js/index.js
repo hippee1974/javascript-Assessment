@@ -61,7 +61,6 @@ window.addEventListener('DOMContentLoaded', () => {
       a: 0,
     },
 
-
   ];
 
   // function to Display the quiz questions and answers from the object
@@ -82,11 +81,12 @@ window.addEventListener('DOMContentLoaded', () => {
   };
 
   // Calculate the score
+  let score = 0;
   const calculateScore = () => {
-    let score = 0;
+    
    
     quizArray.map((quizItem, index) => {
-      for (let i = 0; i < quizItem.length; i++) {
+      for (let i = 0; i < 4; i++) {
         //highlight the li if it is the correct answer
         let li = `li_${index}_${i}`;
         let r = `radio_${index}_${i}`;
@@ -99,24 +99,21 @@ window.addEventListener('DOMContentLoaded', () => {
           //change background color of li element here
           liElement.style.color = 'green';
           
-      
         } else
         {
           liElement.style.color = 'red';
         }
 
-        if (radioElement.checked == quizItem.a) {
+        if (radioElement.checked && quizItem.a === i) {
 
            // code for task 1 goes here
-          console.log('it is correct');
           score++;
+          console.log('it is correct' +score);
 
         } 
           
         }//end for loop
-
-       //correctAnswer.innerHTML = score + '/' + quizArray[i];
-
+        //return score;
       
     }); //end quizArray
   };
@@ -124,7 +121,7 @@ window.addEventListener('DOMContentLoaded', () => {
   //scoreCard
 
   function scoreCard(){
-    scoreCount.innerHTML = `<p>Total score- ${score} </p>`
+    scoreCount.innerHTML = `<p>Total score- ${score}</p>`
   }
   // call the displayQuiz function
   displayQuiz();
